@@ -1,26 +1,59 @@
 // app/layout.tsx
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans"; // already in your project
+import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import Header from "./components/ui/Header";
 import Footer from "./components/ui/Footer";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "Your SaaS Name - Simple & Powerful",
-  description: "Your product description here",
+  title: "RapidRescue 🚑 | Emergency Response & Ambulance Dispatch Platform",
+  description:
+    "RapidRescue is a real-time emergency response platform that connects patients, ambulances, and hospitals for faster life-saving care.",
+
+  keywords: [
+    "RapidRescue",
+    "Emergency Response",
+    "Ambulance Dispatch",
+    "Hospital Coordination",
+    "Emergency Healthcare Platform",
+  ],
+
+  authors: [{ name: "RapidRescue Team" }],
+
+  openGraph: {
+    title: "RapidRescue 🚑",
+    description:
+      "Real-time emergency response platform for ambulance dispatch and hospital coordination.",
+    url: "https://rapidrescue.com",
+    siteName: "RapidRescue",
+    locale: "en_US",
+    type: "website",
+  },
+
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.png",
+  },
+
+  metadataBase: new URL("https://rapidrescue.com"),
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" suppressHydrationWarning className={cn("font-sans", geist.variable)}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={cn("font-sans", geist.variable)}
+    >
       <body className={`${GeistSans.className} antialiased bg-gray-50`}>
         <Header />
         <main className="min-h-screen">{children}</main>
