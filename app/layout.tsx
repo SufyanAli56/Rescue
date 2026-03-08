@@ -2,8 +2,8 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans"; // already in your project
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Header from "./components/ui/Header";
+import Footer from "./components/ui/Footer";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
 
