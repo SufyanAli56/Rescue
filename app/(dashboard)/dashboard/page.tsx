@@ -55,7 +55,7 @@ export default function Dashboard() {
           <h1 className="text-4xl font-bold text-white mb-2">
             Welcome back, <span className="text-red-400">Hero</span> 👋
           </h1>
-          <p className="text-gray-400">Here's what's happening in your emergency network</p>
+          <p className="text-gray-400">Here&apos;s what&apos;s happening in your emergency network</p>
         </div>
 
         {/* Stats Grid */}

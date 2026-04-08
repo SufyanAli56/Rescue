@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { getCurrentLocation, Coordinates } from "../lib/geolocation";
 
 export const useGeolocation = () => {
@@ -15,8 +15,8 @@ export const useGeolocation = () => {
     try {
       const coords = await getCurrentLocation();
       setLocation(coords);
-    } catch (err: any) {
-      setError(err.message || "Failed to get location");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to get location");
     } finally {
       setLoading(false);
     }

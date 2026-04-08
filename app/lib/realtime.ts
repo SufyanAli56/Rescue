@@ -45,6 +45,6 @@ export const subscribeToEmergencyUpdates = (
   return channel;
 };
 
-export const unsubscribe = (channel: any) => {
+export const unsubscribe = (channel: ReturnType<typeof supabase.channel>) => {
   supabase.removeChannel(channel);
 };
