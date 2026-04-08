@@ -8,37 +8,102 @@ import { cn } from "@/lib/utils";
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "RapidRescue 🚑 | Emergency Response & Ambulance Dispatch Platform",
+  title: "RapidRescue 🚨 | Real-Time Emergency Response Platform",
   description:
-    "RapidRescue is a real-time emergency response platform that connects patients, ambulances, and hospitals for faster life-saving care.",
+    "Connect with nearby volunteers instantly during emergencies. RapidRescue provides real-time emergency alerts, live GPS tracking, and community-powered emergency response.",
 
   keywords: [
     "RapidRescue",
     "Emergency Response",
-    "Ambulance Dispatch",
-    "Hospital Coordination",
-    "Emergency Healthcare Platform",
+    "Emergency Alert System",
+    "Volunteer Network",
+    "Real-time Emergency",
+    "GPS Tracking",
+    "Community Emergency Response",
+    "Emergency Help",
+    "Nearby Volunteers",
+    "Emergency Platform",
   ],
 
   authors: [{ name: "RapidRescue Team" }],
 
+  creator: "RapidRescue",
+  publisher: "RapidRescue",
+
+  // Open Graph
   openGraph: {
-    title: "RapidRescue 🚑",
-    description:
-      "Real-time emergency response platform for ambulance dispatch and hospital coordination.",
-    url: "https://rapidrescue.com",
-    siteName: "RapidRescue",
-    locale: "en_US",
     type: "website",
+    locale: "en_US",
+    url: "https://rapidrescue.vercel.app",
+    siteName: "RapidRescue",
+    title: "RapidRescue 🚨 | Real-Time Emergency Response Platform",
+    description:
+      "Connect with nearby volunteers instantly during emergencies. Real-time alerts, live GPS tracking, and community-powered emergency response.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "RapidRescue - Emergency Response Platform",
+        type: "image/png",
+      },
+    ],
   },
 
+  // Twitter Card
+  twitter: {
+    card: "summary_large_image",
+    title: "RapidRescue 🚨 | Real-Time Emergency Response",
+    description:
+      "Connect with nearby volunteers instantly during emergencies. Real-time alerts and live GPS tracking.",
+    images: ["/og-image.png"],
+    creator: "@rapidrescue",
+    site: "@rapidrescue",
+  },
+
+  // Icons & Favicons
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/favicon.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/icon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    other: [
+      {
+        rel: "mask-icon",
+        url: "/safari-pinned-tab.svg",
+      },
+    ],
   },
 
-  metadataBase: new URL("https://rapidrescue.com"),
+  // Manifest
+  manifest: "/site.webmanifest",
+
+  // Additional metadata
+  metadataBase: new URL("https://rapidrescue.vercel.app"),
+  alternates: {
+    canonical: "/",
+  },
+
+  // App-specific
+  applicationName: "RapidRescue",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "RapidRescue",
+  },
+
+  // Verification (add your verification codes when available)
+  // verification: {
+  //   google: "your-google-verification-code",
+  //   yandex: "your-yandex-verification-code",
+  // },
+
+  // Category
+  category: "Emergency Services",
 };
 
 export default function RootLayout({
