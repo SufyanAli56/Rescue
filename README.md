@@ -1,3 +1,6 @@
+so create redme code for this file for this as well 
+
+```markdown
 # 🚨 RapidRescue – Real-Time Emergency Help Platform
 
 RapidRescue is a **real-time emergency assistance platform** designed to help people quickly request help and connect with nearby volunteers during emergencies.
@@ -72,3 +75,5 @@ navigator.geolocation.getCurrentPosition((position) => {
   const latitude = position.coords.latitude;
   const longitude = position.coords.longitude;
 });
+
+```
