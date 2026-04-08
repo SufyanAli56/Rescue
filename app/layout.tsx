@@ -2,8 +2,6 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
-import Header from "./components/ui/Header";
-import Footer from "./components/ui/Footer";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
 
@@ -55,9 +53,7 @@ export default function RootLayout({
       className={cn("font-sans", geist.variable)}
     >
       <body className={`${GeistSans.className} antialiased bg-gray-50`}>
-        <Header />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   );

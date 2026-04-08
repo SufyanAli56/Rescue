@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
+import Link from "next/link";
 
 export default function Header() {
   const [user, setUser] = useState<any>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const getUser = async () => {
@@ -14,7 +16,6 @@ export default function Header() {
 
     getUser();
 
-    // Optional: listen to auth state changes
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
     });
@@ -30,59 +31,47 @@ export default function Header() {
   };
 
   return (
-    <header className="z-50 w-full bg-white backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-8">
+    <header className="fixed top-0 z-50 w-full bg-slate-900/80 backdrop-blur-xl border-b border-white/10">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
 
         {/* Logo */}
-        <div className="flex items-center gap-2">
-          <span className="flex items-center gap-2 text-xl font-bold tracking-tight text-gray-900">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="red"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="w-6 h-6"
-            >
-              <rect x="9" y="3" width="6" height="18" fill="red" />
-              <rect x="3" y="9" width="18" height="6" fill="red" />
-            </svg>
-            RapidRescue
+        <Link href="/" className="flex items-center gap-3 group">
+          <div className="relative">
+            <div className="absolute inset-0 bg-red-500 blur-lg opacity-50 group-hover:opacity-75 transition-opacity"></div>
+            <div className="relative w-10 h-10 bg-gradient-to-br from-red-500 to-orange-500 rounded-lg flex items-center justify-center">
+              <span className="text-2xl">🚨</span>
+            </div>
+          </div>
+          <span className="text-xl font-bold text-white">
+            Rapid<span className="text-red-400">Rescue</span>
           </span>
-        </div>
+        </Link>
 
-        {/* Navigation */}
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
           {!user ? (
             <>
-              <a href="/features" className="text-sm font-medium text-gray-600 hover:text-gray-900">
+              <Link href="/features" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">
                 Features
-              </a>
-              <a href="/how-it-works" className="text-sm font-medium text-gray-600 hover:text-gray-900">
+              </Link>
+              <Link href="/how-it-works" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">
                 How it Works
-              </a>
-              <a href="/volunteers" className="text-sm font-medium text-gray-600 hover:text-gray-900">
+              </Link>
+              <Link href="/volunteers" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">
                 Volunteers
-              </a>
+              </Link>
             </>
           ) : (
             <>
-              {/* New menu items after login */}
-              <a href="/dashboard" className="text-sm font-medium text-gray-600 hover:text-gray-900">
+              <Link href="/dashboard" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">
                 Dashboard
-              </a>
-              <a href="/emergency" className="text-sm font-medium text-red-600 hover:text-red-700">
+              </Link>
+              <Link href="/alert" className="text-sm font-medium text-red-400 hover:text-red-300 transition-colors">
                 Emergency
-              </a>
-              <a href="/map" className="text-sm font-medium text-gray-600 hover:text-gray-900">
+              </Link>
+              <Link href="/map" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">
                 Live Map
-              </a>
-              {/* Add your new menu item here */}
-              <a href="/notifications" className="text-sm font-medium text-gray-600 hover:text-gray-900">
-                Notifications
-              </a>
+              </Link>
             </>
           )}
         </nav>
@@ -91,27 +80,76 @@ export default function Header() {
         <div className="flex items-center gap-4">
           {!user ? (
             <>
-              <a href="/login" className="text-sm font-medium text-gray-700 hover:text-gray-900">
+              <Link href="/login" className="hidden sm:block text-sm font-medium text-gray-300 hover:text-white transition-colors">
                 Login
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/signup"
-                className="rounded-lg bg-red-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-red-700 transition"
+                className="px-6 py-2.5 bg-gradient-to-r from-red-600 to-red-700 text-white text-sm font-bold rounded-lg hover:from-red-700 hover:to-red-800 transition-all duration-300 shadow-lg shadow-red-500/30"
               >
-                Sign Up
-              </a>
+                Get Started
+              </Link>
             </>
           ) : (
             <button
               onClick={logout}
-              className="rounded-lg bg-gray-900 px-5 py-2.5 text-sm font-medium text-white hover:bg-gray-800"
+              className="px-6 py-2.5 bg-white/10 backdrop-blur-sm text-white text-sm font-medium rounded-lg border border-white/20 hover:bg-white/20 transition-all"
             >
               Logout
             </button>
           )}
-        </div>
 
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 text-gray-300 hover:text-white"
+          >
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              {mobileMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+        </div>
       </div>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-slate-800/95 backdrop-blur-xl border-t border-white/10">
+          <nav className="px-6 py-4 space-y-3">
+            {!user ? (
+              <>
+                <Link href="/features" className="block text-gray-300 hover:text-white py-2">
+                  Features
+                </Link>
+                <Link href="/how-it-works" className="block text-gray-300 hover:text-white py-2">
+                  How it Works
+                </Link>
+                <Link href="/volunteers" className="block text-gray-300 hover:text-white py-2">
+                  Volunteers
+                </Link>
+                <Link href="/login" className="block text-gray-300 hover:text-white py-2">
+                  Login
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link href="/dashboard" className="block text-gray-300 hover:text-white py-2">
+                  Dashboard
+                </Link>
+                <Link href="/alert" className="block text-red-400 hover:text-red-300 py-2">
+                  Emergency
+                </Link>
+                <Link href="/map" className="block text-gray-300 hover:text-white py-2">
+                  Live Map
+                </Link>
+              </>
+            )}
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
